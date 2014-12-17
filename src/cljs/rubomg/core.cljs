@@ -20,4 +20,4 @@
       (dom/div nil
         (dom/h1 nil "rubomg is working!")))))
 
-(om/root rubomg-app app-state {:target (.getElementById js/document "content")})
+(om/root rubomg-app app-state {:target (.getElementById js/document "app")})

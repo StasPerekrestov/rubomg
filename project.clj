@@ -9,7 +9,7 @@
                  [compojure "1.3.1"]
                  [cheshire "5.4.0"]
                  ;; CLJS
-                 [org.clojure/clojurescript "0.0-2411"]
+                 [org.clojure/clojurescript "0.0-2496"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.22"]
                  [secretary "1.2.1"]
