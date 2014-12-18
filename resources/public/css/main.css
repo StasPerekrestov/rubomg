@@ -1,0 +1,418 @@
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+body {
+    background: black;
+    opacity: 0.9;
+}
+
+#container {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.video-container {
+    transition: all 0.3s ease;
+}
+
+.faded {
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.quotes {
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    margin-top: -130px;
+    color: white;
+    width: 100%;
+}
+
+.quotes .item {
+    text-align: center;
+    width: 33%;
+    box-sizing: border-box;
+    display: inline-block;
+    opacity: 0.8;
+}
+
+.quotes .item .value {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 130px;
+    text-shadow: 0 0 15px #555;
+    font-weight: bold;
+    transition: all 1s ease;
+}
+
+.quotes .item.plus .value {
+    color: #caefaf;
+}
+
+.quotes .item.minus .value {
+    color: #efafaf;
+}
+
+.quotes .item .note {
+    letter-spacing: 3px;
+    margin-top: 20px;
+    opacity: 0.6;
+    text-shadow: 0 0 3px #666;
+}
+
+.update-hint {
+    position: absolute;
+    top: 60px;
+    width: 40em;
+    right: 15px;
+    text-align: center;
+    color: #fff9cc;
+    opacity: 0.7;
+    font-size: 15px;
+    letter-spacing: 2px;
+    line-height: 20px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+}
+
+.update-hint:after {
+    content: '';
+    position: absolute; /* Абсолютное позиционирование */
+    right: 15px;
+    top: -20px; /* Положение треугольника */
+    border: 10px solid transparent;
+    border-bottom: 10px solid rgba(0, 0, 0, 0.5);
+    /*border-radius: 3px;*/
+}
+
+.title {
+    position: absolute;
+    /*bottom: 55px;*/
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    opacity: 0.7;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
+.title-top {
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    opacity: 0.7;
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.bottom-rotator {
+    width: 100%;
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: all 2s ease
+}
+
+.bottom-rotator.shown {
+    opacity: 0.5;
+    visibility: visible;
+}
+
+.bottom-rotator a {
+    color:white;
+    text-decoration: none;
+    display: inline-block;
+    border-bottom:1px solid #777;
+}
+
+.bottom-rotator a:hover {
+    border-bottom:1px solid #fff;
+}
+
+.addthis_custom_sharing .pluso-engine {
+
+}
+
+.sound-switch {
+    z-index: 10;
+    cursor: pointer;
+    display: block;
+    width: 1em;
+    text-align: left;
+    color: white;
+    opacity: 0.5;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    text-shadow: 0 0 7px #777;
+}
+
+.sound-switch.fa-volume-off {
+    opacity: 0.4;
+}
+
+.music-switch {
+    z-index: 10;
+    cursor: pointer;
+    display: block;
+    width: 1em;
+    text-align: left;
+    color: white;
+    opacity: 0.5;
+    position: absolute;
+    top: 10px;
+    right: 120px;
+    text-shadow: 0 0 7px #777;
+    line-height: 1.2em;
+    font-size: 1.6em;
+}
+
+.settings-switch {
+    z-index: 10;
+    cursor: pointer;
+    display: block;
+    width: 1em;
+    text-align: left;
+    color: white;
+    opacity: 0.5;
+    position: absolute;
+    top: 10px;
+    right: 75px;
+    text-shadow: 0 0 7px #777;
+    line-height: 1.2em;
+    font-size: 1.7em;
+}
+
+.clients-online {
+    background: url("../i/user.png") left center no-repeat;
+    padding-left: 25px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 1s ease;
+    color: white;
+    position: absolute;
+    letter-spacing: 3px;
+    font-size: 14px;
+    bottom: 12px;
+    left: 17px;
+    min-height: 20px;
+    line-height: 20px;
+}
+
+.clients-online.showed {
+    visibility: visible;
+    opacity: 0.3;
+}
+
+.contacts {
+    z-index: 10;
+    color: white;
+    position: absolute;
+    letter-spacing: 3px;
+    font-size: 14px;
+    bottom: 17px;
+    right: 17px;
+}
+
+.contacts a {
+    transition: all 0.5s ease;
+    opacity: 0.4;
+    color: white;
+    text-decoration: none;
+}
+
+.contacts a:hover {
+    text-decoration: underline;
+    opacity: 0.6;
+}
+
+.settings-window {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    top: -200px;
+    margin-left: -270px;
+    margin-top: -220px;
+    width: 525px;
+    height: 425px;
+    background: rgba(10, 10, 10, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease;
+    padding: 30px 10px 30px 35px;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.settings-window.audio {
+    margin-left: -280px;
+    width: 560px;
+}
+
+.settings-window.showed {
+    visibility: visible;
+    opacity: 1;
+    top: 50%;
+}
+
+.settings-window h3 {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 24px;
+    margin: 0 0 30px 0;
+    color: #333
+}
+
+.settings-window h4 {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    color: #666
+}
+
+.settings-window .close {
+    color: #999;
+    position: absolute;
+    bottom: 20px;
+    right: 30px
+}
+
+.video-switcher {
+    position: absolute;
+    transition: all 0.5s ease;
+}
+
+.video-switcher a {
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    background-size: cover;
+    width: 75px;
+    height: 75px;
+    color: white;
+}
+
+.video-switcher a:hover {
+    opacity: 1;
+}
+
+.video-switcher a.active {
+    border: 4px solid #6a6;
+}
+
+.audio-switcher {
+    text-align: center;
+}
+
+.audio-switcher a {
+    /*width: 8em;*/
+    /*height: 3em;*/
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    margin-right: 25px;
+    margin-bottom: 30px;
+    display: inline-block;
+    background-size: cover;
+    color: white;
+    padding:10px 20px;
+    background: rgba(200,255,200,0.3);
+    border-radius: 10px;
+    border: 4px solid #454;
+}
+
+.audio-switcher a:hover {
+    background: rgba(200,255,200,0.7);
+}
+
+.audio-switcher a.active {
+    border: 4px solid #6a6;
+    background: rgba(200,255,200,0.9);
+    color:#454;
+}
+
+.datetime {
+    opacity: 0.6;
+    position:absolute;
+    left:10px;
+    top:10px;
+    color:white;
+}
+
+.datetime .time {
+    /*font-family:  sans-serif;*/
+    font-size: 18px;
+    letter-spacing: 2px;
+    /*font-weight: bold;*/
+    margin-bottom: 3px;
+}
+
+.datetime .date {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.rubbrent {
+    position: absolute;width: 33%; text-align: center
+}
+
+
+.top-com-link {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    margin-left: -170px;
+    width: 340px;
+    letter-spacing: 3px;
+    color: white;
+    font-size: 15px;
+    opacity: 0.7;
+    transition: all 0.5s ease;
+    text-align: center;
+}
+
+.top-com-link:hover {
+    opacity: 0.9;
+}
+
+.top-com-link .logo {
+    background: url("../i/sirinbird.png");
+    width: 55px;
+    height: 45px;
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+.top-com-link .notes {
+    display: block;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+}
+
+.top-com-link .note {
+    /*display: none;*/
+    text-align: left;
+    opacity: 0.7;
+    margin: 0 auto;
+    width:10em;
+    padding-left:1em;
+    box-sizing: content-box;
+
+}
+

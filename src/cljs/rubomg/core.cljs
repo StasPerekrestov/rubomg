@@ -7,6 +7,7 @@
               [cljs-http.client :as http]
               [rubomg.utils :refer [guid]]
               [rubomg.yahoo.rates :as finance]
+              [rubomg.visualiser :as visualiser]
               [figwheel.client :as fw]))
 
 ;; Lets you do (prn "stuff") to the console
@@ -33,7 +34,8 @@
               (recur))))))
     om/IRenderState
     (render-state [this {:keys [rates]}]
-                  (dom/div nil (get-in data [:rate :Rate])))))
+                  (om/build visualiser/rates (get-in data [:rate])))))
+                  ;(om/build visualiser/rates "Don Kiyote2"))))
 
 (defn rubomg-app [app owner]
   (reify
@@ -41,8 +43,7 @@
     (render [_]
       (dom/div nil
         (dom/h1 nil "Currency Rates")
-        (om/build rates app)
-               ))))
+        (om/build rates app)))))
 
 (om/root rubomg-app app-state {:target (.getElementById js/document "app")})
 
