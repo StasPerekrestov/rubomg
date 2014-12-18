@@ -14,28 +14,25 @@
 (enable-console-print!)
 
 (defonce app-state
-  (atom {:rate {}}))
+  (atom {:rate {:usd nil :eur nil}}))
 
 
 (defn rates [data owner]
   (reify
     om/IInitState
     (init-state [_]
-      {:rates-ch (finance/quote)})
+      {:rates-ch (finance/xchange)})
     om/IWillMount
     (will-mount [_]
-      (print "will mount")
       (let [rates-ch (om/get-state owner :rates-ch)]
         (go
           (loop []
-            (let [rates (<! rates-ch)]
-              (om/update! data [:rate] rates)
-              (print rates)
+            (let [rate (<! rates-ch)]
+              (om/transact! data :rates (fn[r] (merge r rate)))
               (recur))))))
     om/IRenderState
-    (render-state [this {:keys [rates]}]
-                  (om/build visualiser/rates (get-in data [:rate])))))
-                  ;(om/build visualiser/rates "Don Kiyote2"))))
+    (render-state [_ _]
+      (om/build visualiser/rates (get-in data [:rates])))))
 
 (defn rubomg-app [app owner]
   (reify

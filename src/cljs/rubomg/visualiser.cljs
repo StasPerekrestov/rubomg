@@ -17,7 +17,7 @@
                  (dom/div #js {:className "note"
                                :style #js {:font-size "136.129032258065px"}} (:note data))))))
 
-(defn rates [rate owner]
+(defn rates [rates owner]
   (reify
     om/IRender
     (render [_]
@@ -28,6 +28,14 @@
         (dom/div #js
                {:className "quotes"
                 :style #js {:margin-top "-86px"}}
-          (om/build section {:rate (.toFixed (js/parseFloat (:Rate rate)) 2) :note "Ru" :style "item usd minus"})
-          (om/build section {:rate "72.1" :note "EUR" :style "item eur"})
-          (om/build section {:rate "61.1" :note "Brent" :style "item brent plus"}))))))
+          (apply dom/div nil
+            (let [{:keys [usd eur]} rates]
+              [(om/build section {:rate (if (nil? usd) "" (.toFixed usd 2))
+                                 :note "Ru"
+                                 :style "item usd minus"})
+              (om/build section {:rate (if (nil? eur) "" (.toFixed eur 2))
+                                 :note "Eur"
+                                 :style "item eur"})
+              (om/build section {:rate "61.1"
+                                 :note "Brent"
+                                 :style "item brent plus"})])))))))
