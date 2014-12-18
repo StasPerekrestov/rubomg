@@ -10,12 +10,13 @@
   (reify
     om/IRender
     (render [_]
-        (dom/div #js {:className (:style data)
+      (let [{:keys [style rate note]} data]
+        (dom/div #js {:className style
                       :style #js {:width "33%"}}
                  (dom/div #js {:className "value"
-                               :style #js {:font-size "136.129032258065px"}} (:rate data))
+                               :style #js {:font-size "136.129032258065px"}} rate)
                  (dom/div #js {:className "note"
-                               :style #js {:font-size "136.129032258065px"}} (:note data))))))
+                               :style #js {:font-size "136.129032258065px"}} note))))))
 
 (defn rates [rates owner]
   (reify
@@ -25,10 +26,8 @@
         (dom/div #js {:className "datetime"}
             (dom/div #js {:className "time"} "20:46")
             (dom/div #js {:className "date"} ""))
-        (dom/div #js
-               {:className "quotes"
-                :style #js {:margin-top "-86px"}}
-          (apply dom/div nil
+          (apply dom/div #js {:className "quotes"
+                              :style #js {:margin-top "-86px"}}
             (let [{:keys [usd eur]} rates]
               [(om/build section {:rate (if (nil? usd) "" (.toFixed usd 2))
                                  :note "Ru"
@@ -38,4 +37,4 @@
                                  :style "item eur"})
               (om/build section {:rate "61.1"
                                  :note "Brent"
-                                 :style "item brent plus"})])))))))
+                                 :style "item brent plus"})]))))))
