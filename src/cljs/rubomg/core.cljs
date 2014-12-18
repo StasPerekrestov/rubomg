@@ -12,8 +12,8 @@
 ;; Lets you do (prn "stuff") to the console
 (enable-console-print!)
 
-(def app-state
-  (atom {:things []}))
+(defonce app-state
+  (atom {:rate {}}))
 
 
 (defn rates [data owner]
@@ -23,23 +23,25 @@
       {:rates-ch (finance/quote)})
     om/IWillMount
     (will-mount [_]
+      (print "will mount")
       (let [rates-ch (om/get-state owner :rates-ch)]
         (go
           (loop []
             (let [rates (<! rates-ch)]
-              (print "response: " rates)
+              (om/update! data [:rate] rates)
+              (print rates)
               (recur))))))
     om/IRenderState
     (render-state [this {:keys [rates]}]
-                  (dom/div nil "Test"))))
+                  (dom/div nil (get-in data [:rate :Rate])))))
 
 (defn rubomg-app [app owner]
   (reify
     om/IRender
     (render [_]
       (dom/div nil
-        (dom/h1 nil "rubomg is working!")
-        (om/build rates nil)
+        (dom/h1 nil "Currency Rates")
+        (om/build rates app)
                ))))
 
 (om/root rubomg-app app-state {:target (.getElementById js/document "app")})
