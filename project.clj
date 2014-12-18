@@ -13,11 +13,13 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.22"]
                  [secretary "1.2.1"]
-                 [om "0.8.0-beta3"]]
+                 [om "0.8.0-beta3"]
+                 [figwheel "0.1.7-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.4-SNAPSHOT"]
             [lein-ring "0.8.13"]
-            [lein-pdo "0.1.1"]]
+            [lein-pdo "0.1.1"]
+            [lein-figwheel "0.1.7-SNAPSHOT"]]
 
   :aliases {"dev" ["pdo" "cljsbuild" "auto" "dev," "ring" "server-headless"]}
 
@@ -46,4 +48,10 @@
                                    :preamble ["react/react.min.js"]
                                    :externs ["react/externs/react.js"]
                                    :closure-warnings
-                                   {:non-standard-jsdoc :off}}}]})
+                                   {:non-standard-jsdoc :off}}}]
+              :figwheel
+                {:http-server-root "public" ;; default and assumes "resources"
+                 :server-port 3449 ;; default
+                 :css-dirs ["resources/public/css"] ;; watch and update CSS
+                 ;; :ring-handler hello-world.server/handler
+                 }})
