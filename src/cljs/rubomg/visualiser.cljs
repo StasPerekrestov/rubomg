@@ -21,25 +21,19 @@
   (reify
     om/IInitState
     (init-state [_]
-                {:time (chan) :tick nil})
+                {:time nil})
     om/IWillMount
     (will-mount [_]
-                (let [time (om/get-state owner :time)]
-                  (go (loop []
-                        (let [t (<! time)]
-                          (om/set-state! owner :tick t))
-                        (recur)))
-                  (go (loop []
-                        (>! time (get-time))
-                        (<! (timeout 500))
-                        (recur)))))
+                (go (loop []
+                      (om/set-state! owner :time (get-time))
+                      (<! (timeout 500))
+                      (recur))))
     om/IRenderState
-    (render-state [_ {:keys [tick]}]
-                  (let [{:keys [hours minutes seconds]} tick]
+    (render-state [_ {:keys [time]}]
+                  (let [{:keys [hours minutes seconds]} time]
                   (dom/div #js {:className "datetime"}
                            (dom/div #js {:className "time"} (str hours ":" minutes ":" seconds))
                            (dom/div #js {:className "date"} ""))))))
-
 
 (defn rates [rates owner]
   (reify
