@@ -51,7 +51,7 @@
                               :style #js {:margin-top "-86px"}}
             (let [{:keys [usd eur brent]} rates]
               [(om/build section {:rate (if (nil? usd) "" (.toFixed usd 2))
-                                 :note "Ru"
+                                 :note "Usd"
                                  :style "item usd minus"})
               (om/build section {:rate (if (nil? eur) "" (.toFixed eur 2))
                                  :note "Eur"
