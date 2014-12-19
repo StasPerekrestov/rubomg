@@ -28,13 +28,13 @@
             (dom/div #js {:className "date"} ""))
           (apply dom/div #js {:className "quotes"
                               :style #js {:margin-top "-86px"}}
-            (let [{:keys [usd eur]} rates]
+            (let [{:keys [usd eur brent]} rates]
               [(om/build section {:rate (if (nil? usd) "" (.toFixed usd 2))
                                  :note "Ru"
                                  :style "item usd minus"})
               (om/build section {:rate (if (nil? eur) "" (.toFixed eur 2))
                                  :note "Eur"
                                  :style "item eur"})
-              (om/build section {:rate "61.1"
+              (om/build section {:rate (if (nil? brent) "" (.toFixed brent 2))
                                  :note "Brent"
                                  :style "item brent plus"})]))))))

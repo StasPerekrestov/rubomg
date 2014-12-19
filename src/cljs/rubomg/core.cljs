@@ -21,7 +21,7 @@
   (reify
     om/IInitState
     (init-state [_]
-      {:rates-ch (finance/xchange)})
+      {:rates-ch (finance/rates)})
     om/IWillMount
     (will-mount [_]
       (let [rates-ch (om/get-state owner :rates-ch)]
