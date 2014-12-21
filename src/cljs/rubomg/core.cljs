@@ -39,7 +39,6 @@
     om/IRender
     (render [_]
       (dom/div nil
-        (dom/h1 nil "Currency Rates")
         (om/build rates app)))))
 
 (om/root rubomg-app app-state {:target (.getElementById js/document "app")})
