@@ -14,7 +14,7 @@
 (enable-console-print!)
 
 (defonce app-state
-  (atom {:rate {:usd nil :eur nil}}))
+  (atom {:rate {:usd nil :eur nil :brent nil}}))
 
 
 (defn rates [data owner]
