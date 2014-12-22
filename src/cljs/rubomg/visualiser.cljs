@@ -17,6 +17,12 @@
                                :style #js {:font-size "136.129032258065px"}} rate)
                  (dom/div #js {:className "note"
                                :style #js {:font-size "136.129032258065px"}} note))))))
+(defn with-leading-zero [number]
+  (let [t (str number)]
+    (if (= 1 (.-length t))
+      (str "0" t)
+      t)))
+
 (defn clock [_ owner]
   (reify
     om/IInitState
@@ -32,7 +38,7 @@
     (render-state [_ {:keys [time]}]
                   (let [{:keys [hours minutes seconds]} time]
                   (dom/div #js {:className "datetime"}
-                           (dom/div #js {:className "time"} (str hours ":" minutes ":" seconds))
+                           (dom/div #js {:className "time"} (str hours ":" (with-leading-zero minutes) ":" (with-leading-zero seconds)))
                            (dom/div #js {:className "date"} ""))))))
 
 (defn rates [rates owner]
