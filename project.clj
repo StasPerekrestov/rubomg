@@ -14,9 +14,9 @@
                  [cljs-http "0.1.24"]
                  [secretary "1.2.1"]
                  [om "0.8.0-rc1"]
-                 [figwheel "0.2.0-SNAPSHOT"]
+                 [figwheel "0.2.0-SNAPSHOT"]]
 
-  :plugins [[lein-cljsbuild "1.0.4-SNAPSHOT"]
+  :plugins [[lein-cljsbuild "1.0.4"]
             [lein-ring "0.8.13"]
             [lein-pdo "0.1.1"]
             [lein-figwheel "0.2.0-SNAPSHOT"]]
