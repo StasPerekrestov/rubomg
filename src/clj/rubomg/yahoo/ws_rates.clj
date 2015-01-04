@@ -1,4 +1,4 @@
-(ns rubomg.ws-rates
+(ns rubomg.yahoo.ws-rates
   (:require
     [compojure.core :refer [GET POST defroutes]]
     [taoensso.sente :as sente]))
@@ -15,5 +15,4 @@
   )
 
 (defroutes ws-routes
-   (GET  "/chsk" req (ring-ajax-get-or-ws-handshake req))
-   (POST "/chsk" req (ring-ajax-post               req)))
+   (GET  "/chsk" req (ring-ajax-get-or-ws-handshake req)))

@@ -5,7 +5,7 @@
               [ring.util.response :as resp]
               [cheshire.core :as json]
               [clojure.java.io :as io]
-              [rubomg.ws-rates :as ws]))
+              [rubomg.yahoo.ws-rates :as ws]))
 
 (defn json-response [data & [status]]
   {:status (or status 200)
