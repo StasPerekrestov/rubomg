@@ -10,5 +10,7 @@
   (let [handler (if (in-dev? args)
                   (reload/wrap-reload
                      (routes core/all-routes)) ;; only reload when dev
-                  (routes core/all-routes))]
-    (run-server handler {:port 8080})))
+                  (routes core/all-routes))
+        port 8080]
+    (println (str "Starting server on port: " port "..."))
+    (run-server handler {:port port})))
