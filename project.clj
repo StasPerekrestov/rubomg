@@ -6,6 +6,8 @@
                  [org.clojure/tools.reader "0.8.13"]
                  ;; CLJ
                  [ring/ring-core "1.3.2"]
+                 [ring/ring-devel "1.3.2"]
+                 [javax.servlet/servlet-api "2.5"]
                  [compojure "1.3.1"]
                  [cheshire "5.4.0"]
                  ;; CLJS
@@ -14,6 +16,7 @@
                  [cljs-http "0.1.24"]
                  [secretary "1.2.1"]
                  [om "0.8.0-rc1"]
+                 [http-kit "2.1.18"]
                  [figwheel "0.2.0-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
@@ -25,6 +28,7 @@
 
   :ring {:handler rubomg.core/app
          :init    rubomg.core/init}
+  :main rubomg.serve
 
   :source-paths ["src/clj"]
 
