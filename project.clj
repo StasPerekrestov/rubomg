@@ -8,6 +8,8 @@
                  [ring/ring-core "1.3.2"]
                  [compojure "1.3.1"]
                  [cheshire "5.4.0"]
+                 [ring/ring-devel "1.3.2"]
+                 [javax.servlet/servlet-api "2.5"]
                  ;; CLJS
                  [org.clojure/clojurescript "0.0-2657"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
@@ -15,6 +17,7 @@
                  [secretary "1.2.1"]
                  [om "0.8.0-rc1"]
                  [figwheel "0.2.0-SNAPSHOT"]
+                 [http-kit "2.1.18"]
                  [com.taoensso/sente "1.3.0-RC1"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
@@ -26,6 +29,8 @@
 
   :ring {:handler rubomg.core/app
          :init    rubomg.core/init}
+
+  :main rubomg.serve
 
   :source-paths ["src/clj"]
 
