@@ -5,7 +5,7 @@
               [ring.util.response :as resp]
               [cheshire.core :as json]
               [clojure.java.io :as io]
-              [rubomg.yahoo.rates :as yahoo]))
+              [rubomg.yahoo.ws-handler :as ws]))
 
 (defn json-response [data & [status]]
   {:status (or status 200)
@@ -19,8 +19,8 @@
                    {:message "You made it!"}))
   (POST "/test" req (json-response
                      {:message "Doing something something important..."}))
-  (GET  "/ws" req (yahoo/ring-ajax-get-or-ws-handshake req))
-  (POST "/ws" req (yahoo/ring-ajax-post              req))
+  (GET  "/ws" req (ws/ring-ajax-get-or-ws-handshake req))
+  (POST "/ws" req (ws/ring-ajax-post              req))
   (route/resources "/")
   (route/not-found "404 - Page not found."))
 

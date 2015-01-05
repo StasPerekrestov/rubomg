@@ -1,20 +1,8 @@
 (ns rubomg.yahoo.rates
   (:require
     [clojure.core.async :refer [put! <! >! chan timeout go close!]]
-    [compojure.core :refer [GET POST defroutes]]
-    [taoensso.sente :as sente]
     [org.httpkit.client :as client]
-    [cheshire.core :refer [parse-string generate-string]]))
-
-(let [{:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn
-              connected-uids]}
-      (sente/make-channel-socket! {})]
-  (def ring-ajax-post                ajax-post-fn)
-  (def ring-ajax-get-or-ws-handshake ajax-get-or-ws-handshake-fn)
-  (def ch-chsk                       ch-recv) ; ChannelSocket's receive channel
-  (def chsk-send!                    send-fn) ; ChannelSocket's send API fn
-  (def connected-uids                connected-uids) ; Watchable, read-only atom
-  )
+    [cheshire.core :refer [parse-string]]))
 
 (defn get-url [url]
   (let [c (chan)]
@@ -40,17 +28,3 @@
           ]
         {:brent brent})))
 
-(go
-    (loop [rates (<! (usd-eur-rates))]
-        (println "Crawling response received")
-        (doseq [uid (:any @connected-uids)]
-          (println "sending to " uid)
-          (chsk-send! uid (generate-string (dissoc rates :usd))))
-         (<! (timeout 9000))
-         (recur (<! (usd-eur-rates)))))
-
-;(defroutes ws-routes
-;   (GET  "/ws" req (ring-ajax-get-or-ws-handshake req)))
-(comment
-  @connected-uids
-  )
