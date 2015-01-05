@@ -17,7 +17,7 @@
                  [secretary "1.2.1"]
                  [om "0.8.0-rc1"]
                  [figwheel "0.2.0-SNAPSHOT"]
-                 [http-kit "2.1.18"]
+                 [http-kit "2.1.19"]
                  [com.taoensso/sente "1.3.0-RC1"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
