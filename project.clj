@@ -11,7 +11,7 @@
                  [ring/ring-devel "1.3.2"]
                  [javax.servlet/servlet-api "2.5"]
                  ;; CLJS
-                 [org.clojure/clojurescript "0.0-2657"]
+                 [org.clojure/clojurescript "0.0-2665"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.24"]
                  [secretary "1.2.1"]
