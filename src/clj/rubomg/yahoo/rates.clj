@@ -34,13 +34,15 @@
        (loop [rates (<! (usd-eur-rates))]
          (server/send! channel (generate-string (dissoc rates :usd)))
          (server/send! channel (generate-string (dissoc rates :eur)))
+         (println "curr request")
          (<! (timeout 5000))
-         (recur (<! (usd-eur-rates)))))
+         (if (server/open? channel) (recur (<! (usd-eur-rates))))))
     (go
        (loop [brent (<! (brent-rates))]
          (server/send! channel (generate-string brent))
+         (println "brent request")
          (<! (timeout 5000))
-         (recur (<! (brent-rates)))))
+         (if (server/open? channel)(recur (<! (brent-rates))))))
     (server/on-close channel (fn [status] (println "channel closed: " status)))
     (server/on-receive channel (fn [data] ;; echo it back
                           (server/send! channel data)))))
