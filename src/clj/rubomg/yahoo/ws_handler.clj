@@ -24,8 +24,6 @@
          (<! (timeout 9000))
          (recur (<! (usd-eur-rates)))))
 
-;(defroutes ws-routes
-;   (GET  "/ws" req (ring-ajax-get-or-ws-handshake req)))
 (comment
   @connected-uids
   (chsk-send! :sente/all-users-without-uid [:some/request-id {:name "Rich Hickey" :type "Awesome"}])
