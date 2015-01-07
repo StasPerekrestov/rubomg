@@ -3,7 +3,7 @@
     [clojure.core.async :refer [put! <! >! chan timeout go close!]]
     [taoensso.sente :as sente]
     [cheshire.core :refer [parse-string]]
-    [rubomg.yahoo.rates :refer [usd-eur-rates]]))
+    [rubomg.yahoo.rates :refer [usd-eur-rates brent-rates]]))
 
 (let [{:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn
               connected-uids]}
@@ -17,14 +17,19 @@
 
 (go
     (loop [rates (<! (usd-eur-rates))]
-        (println "Crawling response received")
-        (doseq [uid (:any @connected-uids)]
-          (println "sending to " uid)
-          (chsk-send! uid [:my-app/some-req (dissoc rates :usd)]))
-         (<! (timeout 9000))
-         (recur (<! (usd-eur-rates)))))
+        (chsk-send! :sente/all-users-without-uid [:omg/rate (dissoc rates :usd)])
+        (chsk-send! :sente/all-users-without-uid [:omg/rate (dissoc rates :eur)])
+        (<! (timeout 9000))
+        (recur (<! (usd-eur-rates)))))
+(go
+    (loop [rates (<! (brent-rates))]
+        (chsk-send! :sente/all-users-without-uid [:omg/rate rates])
+        (<! (timeout 9000))
+        (recur (<! (brent-rates)))))
 
 (comment
   @connected-uids
   (chsk-send! :sente/all-users-without-uid [:some/request-id {:name "Rich Hickey" :type "Awesome"}])
+  (let [[_ res] [:omg/rate {:usd 62.8832}]]
+    res)
   )

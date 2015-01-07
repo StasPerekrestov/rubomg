@@ -15,10 +15,17 @@
   (def chsk-state state)   ; Watchable, read-only atom
   )
 
+(defn map-function-on-map-vals [m f]
+        (apply merge
+               (map (fn [[k v]] {k (f v)})
+                    m)))
+
 (defn rates []
   (let [c (chan)]
     (go
-     (loop [res (<! ch-chsk)]
-       (println res)
-       (>! c res)
+     ;(loop [{res :?data} (<! ch-chsk)]
+     (loop [{res :?data [event-code _] :event} (<! ch-chsk)]
+       (if (= :chsk/recv event-code)
+         (let [[_ rate] res]
+           (>! c (map-function-on-map-vals rate js/parseFloat))))
        (recur (<! ch-chsk)))) c))

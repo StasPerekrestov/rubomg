@@ -9,6 +9,7 @@
                  [compojure "1.3.1"]
                  [cheshire "5.4.0"]
                  [ring/ring-devel "1.3.2"]
+                 [ring/ring-defaults "0.1.3"]
                  [javax.servlet/servlet-api "2.5"]
                  ;; CLJS
                  [org.clojure/clojurescript "0.0-2665"]
