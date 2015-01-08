@@ -8,6 +8,8 @@
 (let [{:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn
               connected-uids]}
       (sente/make-channel-socket! {
+                                   ; we need this stuff to be able to distinguish
+                                   ; only newly joined clients
                                    :user-id-fn (fn [ring-request]
                                                  (let [{:keys [params]} ring-request]
                                                   ;fake :user-id = :client-id
@@ -48,7 +50,9 @@
    (loop [rates (<! cr)]
      (swap! current-rates (fn [r] (merge r rates)))
      (println "rates obtained" rates)
-     (chsk-send! :sente/all-users-without-uid [:omg/rate rates])
+     (doseq [uid (:any @connected-uids)]
+       (chsk-send! uid [:omg/rate rates]))
+     ;(chsk-send! :sente/all-users-without-uid [:omg/rate rates])
      (recur (<! cr))))
   )
 
@@ -60,13 +64,12 @@
           rates @current-rates]
     ;Assign UIDs for clients and notify only newly joined clients
       (doseq [uid notif-clients]
-       (print "new client notified:" uid)
-        (chsk-send! uid [:omg/rate rates]))
-    ;(chsk-send! :sente/all-users-without-uid [:omg/rate rates])
-      )))
+       (println "new client notified with initial data:" uid)
+        (chsk-send! uid [:omg/rate rates])))))
 
 (comment
   @connected-uids
+  @current-rates
   (chsk-send! :sente/all-users-without-uid [:some/request-id {:name "Rich Hickey" :type "Awesome"}])
   (let [[_ res] [:omg/rate {:usd 62.8832}]]
     res)
