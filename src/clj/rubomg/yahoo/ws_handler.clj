@@ -15,17 +15,38 @@
   (def connected-uids                connected-uids) ; Watchable, read-only atom
   )
 
-(go
-    (loop [rates (<! (usd-eur-rates))]
-        (chsk-send! :sente/all-users-without-uid [:omg/rate (dissoc rates :usd)])
-        (chsk-send! :sente/all-users-without-uid [:omg/rate (dissoc rates :eur)])
-        (<! (timeout 9000))
-        (recur (<! (usd-eur-rates)))))
-(go
-    (loop [rates (<! (brent-rates))]
-        (chsk-send! :sente/all-users-without-uid [:omg/rate rates])
-        (<! (timeout 9000))
-        (recur (<! (brent-rates)))))
+(def current-rates
+  (atom {:usd nil :eur nil :brent nil}))
+
+(let [cr (chan)]
+  (go
+   (loop [rates (<! (usd-eur-rates))]
+     (>! cr rates)
+     (<! (timeout 9000))
+     (recur (<! (usd-eur-rates)))))
+  (go
+   (loop [rates (<! (brent-rates))]
+     (>! cr rates)
+     (<! (timeout 9000))
+     (recur (<! (brent-rates)))))
+
+  (go
+   (loop [rates (<! cr)]
+     (swap! current-rates (fn [r] (merge r rates)))
+     (chsk-send! :sente/all-users-without-uid [:omg/rate rates])
+     (recur (<! cr))))
+  )
+
+(add-watch connected-uids :watcher
+  (fn [key atom old-state new-state]
+    (let [old-clients (:any old-state)
+          new-clients (:any new-state)
+          notif-clients (clojure.set/difference new-clients old-clients)
+          rates @current-rates]
+    ;Assign UIDs for clients and notify only newly joined clients
+;;       (doseq [uid notif-clients]
+;;         (chsk-send! uid [:omg/rate {:usd 0}]))
+    (chsk-send! :sente/all-users-without-uid [:omg/rate rates]))))
 
 (comment
   @connected-uids
