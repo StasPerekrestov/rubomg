@@ -16,15 +16,15 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.24"]
                  [secretary "1.2.1"]
-                 [om "0.8.0-rc1"]
-                 [figwheel "0.2.0-SNAPSHOT"]
+                 [org.om/om "0.8.0"]
+                 [figwheel "0.2.1-SNAPSHOT"]
                  [http-kit "2.1.19"]
                  [com.taoensso/sente "1.3.0-RC1"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
             [lein-ring "0.8.13"]
             [lein-pdo "0.1.1"]
-            [lein-figwheel "0.2.0-SNAPSHOT"]]
+            [lein-figwheel "0.2.1-SNAPSHOT"]]
 
   :aliases {"dev" ["pdo" "cljsbuild" "auto" "dev," "ring" "server-headless"]}
 
@@ -60,5 +60,6 @@
                 {:http-server-root "public" ;; default and assumes "resources"
                  :server-port 3449 ;; default
                  :css-dirs ["resources/public/css"] ;; watch and update CSS
-                 ;; :ring-handler hello-world.server/handler
+                 :ring-handler rubomg.serve/bob
+                 ;#_:ring-handler #_rubomg.serve/bob
                  }})
