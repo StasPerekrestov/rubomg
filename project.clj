@@ -19,7 +19,7 @@
                  [org.om/om "0.8.0"]
                  [figwheel "0.2.1-SNAPSHOT"]
                  [http-kit "2.1.19"]
-                 [com.taoensso/sente "1.3.0-RC1"]]
+                 [com.taoensso/sente "1.3.0-RC2"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
             [lein-ring "0.8.13"]
@@ -60,6 +60,5 @@
                 {:http-server-root "public" ;; default and assumes "resources"
                  :server-port 3449 ;; default
                  :css-dirs ["resources/public/css"] ;; watch and update CSS
-                 :ring-handler rubomg.serve/bob
-                 ;#_:ring-handler #_rubomg.serve/bob
+                 :ring-handler rubomg.serve/my-ring-handler
                  }})

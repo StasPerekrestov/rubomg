@@ -22,7 +22,7 @@
 (defn -main [& args] ;; entry point, lein run will pick up and start from here
   (let [handler (if (in-dev? args)
                   (reload/wrap-reload
-                     (routes my-ring-handler)) ;; only reload when dev
+                     (routes #'my-ring-handler)) ;; only reload when dev
                   (routes my-ring-handler))
         port 8080]
     (println (str "Starting server on port: " port "..."))
