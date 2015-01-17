@@ -6,6 +6,10 @@
 
 (defn in-dev? [& _] true) ;; TODO read a config variable from command line, env, or file?
 
+(def dev-handler
+  (reload/wrap-reload
+   (routes #'core/all-routes)))
+
 (defn -main [& args] ;; entry point, lein run will pick up and start from here
   (let [handler (if (in-dev? args)
                   (reload/wrap-reload

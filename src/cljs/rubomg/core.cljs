@@ -43,7 +43,7 @@
 
 (om/root rubomg-app app-state {:target (.getElementById js/document "app")})
 
-;; (fw/watch-and-reload
-;;  :jsload-callback (fn []
-;;                     ;; (stop-and-start-my app)
-;;                     ))
+(fw/watch-and-reload
+ :jsload-callback (fn []
+                    ;; (stop-and-start-my app)
+                    ))
