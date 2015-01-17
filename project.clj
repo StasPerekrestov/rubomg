@@ -17,14 +17,14 @@
                  [cljs-http "0.1.24"]
                  [secretary "1.2.1"]
                  [org.om/om "0.8.0"]
-                 [figwheel "0.2.1-SNAPSHOT"]
+                 [figwheel "0.2.2-SNAPSHOT"]
                  [http-kit "2.1.19"]
-                 [com.taoensso/sente "1.3.0-RC2"]]
+                 [com.taoensso/sente "1.3.0"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
             [lein-ring "0.8.13"]
             [lein-pdo "0.1.1"]
-            [lein-figwheel "0.2.1-SNAPSHOT"]
+            [lein-figwheel "0.2.2-SNAPSHOT"]
             [lein-ancient "0.5.5"]]
 
   :aliases {"dev" ["pdo" "cljsbuild" "auto" "dev," "ring" "server-headless"]}
