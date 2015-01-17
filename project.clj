@@ -11,18 +11,18 @@
                  [compojure "1.3.1"]
                  [cheshire "5.4.0"]
                  ;; CLJS
-                 [org.clojure/clojurescript "0.0-2657"]
+                 [org.clojure/clojurescript "0.0-2665"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.24"]
                  [secretary "1.2.1"]
-                 [om "0.8.0-rc1"]
-                 [http-kit "2.1.18"]
-                 [figwheel "0.2.0-SNAPSHOT"]]
+                 [org.om/om "0.8.0"]
+                 [http-kit "2.1.19"]
+                 [figwheel "0.2.2-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
             [lein-ring "0.8.13"]
             [lein-pdo "0.1.1"]
-            [lein-figwheel "0.2.0-SNAPSHOT"]]
+            [lein-figwheel "0.2.2-SNAPSHOT"]]
 
   :aliases {"dev" ["pdo" "cljsbuild" "auto" "dev," "ring" "server-headless"]}
 
