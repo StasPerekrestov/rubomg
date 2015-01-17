@@ -5,8 +5,15 @@
 (defn ws-socket [ws-url]
   (new js/WebSocket ws-url))
 
-(defn ws-event[]
-  (let [ws (ws-socket "ws://localhost:8080/ws")
+(defn ws-url []
+  (let [loc (.-location js/window)
+        protocol "ws://"
+        host (.-host loc)
+        port (.-port loc)]
+  (str protocol host "/ws")))
+
+(defn ws-event-url [ws-url-retriever]
+  (let [ws (ws-socket (ws-url-retriever))
         c (chan)]
   (set! (.-onmessage ws)
         (fn [msg]
@@ -15,6 +22,8 @@
                   (-> msg
                       (.-data)
                       (JSON/parse)) :keywordize-keys true)))) c))
+
+(def ws-event (partial ws-event-url ws-url))
 
 (defn map-function-on-map-vals [m f]
         (apply merge
