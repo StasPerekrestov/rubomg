@@ -44,6 +44,8 @@
                                    :output-dir "resources/public/js/out"
                                    :optimizations :none
                                    :source-map true
+                                   :source-map-timestamp true
+                                   :cache-analysis true
                                    :externs ["react/externs/react.js"]}}
                        {:id "release"
                         :source-paths ["src/cljs"]
@@ -61,5 +63,6 @@
   :figwheel {:http-server-root "public" ;; default and assumes "resources"
              :server-port 3449 ;; default
              :css-dirs ["resources/public/css"] ;; watch and update CSS
+             :repl false
              :ring-handler rubomg.serve/dev-handler
              })

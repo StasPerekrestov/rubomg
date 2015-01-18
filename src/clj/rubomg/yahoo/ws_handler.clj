@@ -49,7 +49,7 @@
   (go
    (loop [rates (<! cr)]
      (swap! current-rates (fn [r] (merge r rates)))
-     (println "rates obtained" rates)
+     ;(println "rates obtained" rates)
      (doseq [uid (:any @connected-uids)]
        (chsk-send! uid [:omg/rate rates]))
      ;(chsk-send! :sente/all-users-without-uid [:omg/rate rates])
