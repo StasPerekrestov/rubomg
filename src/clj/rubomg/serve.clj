@@ -19,6 +19,10 @@
     ;;
     (wrap-defaults core/all-routes ring-defaults-config)))
 
+;TODO: eliminte the following handler in the future
+(def dev-handler (reload/wrap-reload
+                  (routes #'my-ring-handler)))
+
 (defn -main [& args] ;; entry point, lein run will pick up and start from here
   (let [handler (if (in-dev? args)
                   (reload/wrap-reload

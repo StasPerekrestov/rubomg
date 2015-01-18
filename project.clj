@@ -56,10 +56,10 @@
                                    :preamble ["react/react.min.js"]
                                    :externs ["react/externs/react.js"]
                                    :closure-warnings
-                                   {:non-standard-jsdoc :off}}}]
-              :figwheel
-                {:http-server-root "public" ;; default and assumes "resources"
-                 :server-port 3449 ;; default
-                 :css-dirs ["resources/public/css"] ;; watch and update CSS
-                 :ring-handler rubomg.serve/my-ring-handler
-                 }})
+                                   {:non-standard-jsdoc :off}}}]}
+
+  :figwheel {:http-server-root "public" ;; default and assumes "resources"
+             :server-port 3449 ;; default
+             :css-dirs ["resources/public/css"] ;; watch and update CSS
+             :ring-handler rubomg.serve/dev-handler
+             })
