@@ -22,7 +22,7 @@
                  [com.taoensso/sente "1.3.0"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
-            [lein-ring "0.8.13"]
+            [lein-ring "0.9.1"]
             [lein-pdo "0.1.1"]
             [lein-figwheel "0.2.2-SNAPSHOT"]
             [lein-ancient "0.6.0"]]
