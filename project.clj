@@ -16,7 +16,7 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.24"]
                  [secretary "1.2.1"]
-                 [org.omcljs/om "0.8.6"]
+                 [org.omcljs/om "0.8.7"]
                  [figwheel "0.2.2-SNAPSHOT"]
                  [http-kit "2.1.19"]
                  [com.taoensso/sente "1.3.0"]]
